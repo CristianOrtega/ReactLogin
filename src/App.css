@@ -3,18 +3,23 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+  /* animation: App-logo-spin infinite 20s linear; */
+  height: 10vmin;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Numans');
+.app-cargando {
+  animation: App-logo-spin infinite 1s linear;
+  height: 50px;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Sarabun');
 
 html,body{
-background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+/* background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg'); 
 background-size: cover;
-background-repeat: no-repeat;
+background-repeat: no-repeat;*/
 height: 100%;
-font-family: 'Numans', sans-serif;
+font-family: 'Sarabun','Open Sans', sans-serif;
 }
 
 .container{
@@ -23,23 +28,32 @@ align-content: center;
 }
 
 .card{
-height: 370px;
+min-height: 315px;
 margin-top: auto;
 margin-bottom: auto;
 width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
+background-color: #f7fafc !important;
+box-shadow: 0 5px 35px -10px rgba(0, 0, 0, 0.5);
+border: 0;
+border-radius: .7rem;
+
+position: absolute;
+z-index: 3;
 }
 
-.card-changepassword{
-  height: 320px;
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 400px;
-  background-color: rgba(0,0,0,0.5) !important;
-  }
-
+.card-header {
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+}
 .card-header h3{
-color: white;
+  color: #143f5c;
+  margin: 15px;
+}
+
+.card-footer:last-child {
+  border-radius: 0 0 calc(.25rem - 1px) calc(.25rem - 1px);
 }
 
 .social_icon{
@@ -49,10 +63,10 @@ top: -45px;
 }
 
 .input-group-prepend span{
-width: 50px;
-background-color: #FFC312;
-color: black;
-border:0 !important;
+  background-color: #ffffff;
+  color: #8ea8b9;
+  border: 0 !important;
+  margin-right: 1px;
 }
 
 input:focus{
@@ -85,7 +99,7 @@ background-color: white;
 }
 
 .links{
-color: white;
+  color: white;
 }
 
 .links a{
@@ -99,4 +113,71 @@ margin-left: 4px;
   to {
     transform: rotate(360deg);
   }
+}
+
+.input-group-alternative {
+  transition: box-shadow .15s ease;
+  border: 0;
+  box-shadow: 0 1px 3px rgba(50,50,93,.15), 0 1px 0 rgba(0,0,0,.02);
+}
+
+.input-group-alternative input {
+  border:0;
+}
+
+.form-control {
+  color: #778792 !important;
+}
+
+input::placeholder {
+  color: #a6b4bd !important;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #a6b4bd !important;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #a6b4bd !important;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #a6b4bd !important;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #a6b4bd !important;
+}
+
+.btn {
+  font-size: .875rem;
+  position: relative;
+  transition: all .15s ease;
+  letter-spacing: .025em;
+  text-transform: none;
+  will-change: transform;
+}
+.btn-outline-secondary {
+  color: #4385b1 !important;
+  border-color: #b2b2b200 !important;
+}
+.btn-outline-secondary {
+  background-color: transparent;
+  background-image: none;
+}
+.btn-outline-secondary:hover {
+  color: #212529 !important;
+  border-color: #8fb0c573 !important;
+  background-color: #f7fafc3a;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+}
+.btn-default {
+  color: #fff;
+  border-color: #172b4d;
+  background-color: #172b4d;
+}
+.btn-default:hover {
+  color: #fff;
+  border-color: #1d396b;
+  background-color: #173972;
 }

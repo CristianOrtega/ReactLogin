@@ -25,7 +25,7 @@ class ChangePassword extends Component {
         if (!me.validateForm(me.state)) {
             return null;
         }
-        alert('Enviando...');
+        
     }
 
     validateForm(state) {
@@ -40,33 +40,51 @@ class ChangePassword extends Component {
     render() {
         return (
             <div className="container">
-                <div className="d-flex justify-content-center h-100">
-                    <div className="card-changepassword">
+                <div className="d-flex justify-content-center">
+                    <div className="card mt-4">
                         <div className="card-header">
-                            <h3>Cambiar Contraseña</h3>
-                            <div className="card-body">
-                                <form>
-                                    <div className="input-group form-group">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text"><i className="fas fa-key"></i></span>
-                                        </div>
-                                        <input name="newPassword" type="password" className="form-control" placeholder="Nueva Contraseña"></input>
+                        <h3>Cambiar Contraseña</h3>
+                        </div>
+                        <div className="card-body">
+                            <form>
+                                <div className="input-group form-group input-group-alternative">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><i className="fas fa-key"></i></span>
                                     </div>
-                                    <div className="input-group form-group">
-                                        <div className="input-group-prepend">
-                                            <span className="input-group-text"><i className="fas fa-key"></i></span>
-                                        </div>
-                                        <input type="password" className="form-control" placeholder="Confirme Contraseña"></input>
+                                    <input name="newPassword" type="password" className="form-control" placeholder="Nueva Contraseña"></input>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button">
+                                            <i className="fas fa-eye"></i>
+                                        </button>
                                     </div>
-                                    <div className="form-group">
-                                        <input name="confirmNewPassword" type="submit" value="Cambiar" className="btn float-right login_btn"></input>
+                                </div>
+                                <div className="input-group form-group input-group-alternative">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text"><i className="fas fa-key"></i></span>
                                     </div>
-                                </form>
+                                    <input type="password" className="form-control" placeholder="Confirme Contraseña"></input>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button">
+                                            <i className="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div className="card-footer">
+                            <div className="row">
+                                <div className="col text-left">
+                                    <input type="submit" value="Cancelar" className="btn btn-outline-secondary"></input>
+                                </div>
+                                <div className="col text-right">
+                                    <input type="submit"  name="confirmNewPassword" value="Cambiar" className="btn btn-default"></input>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         );
     }
 }
