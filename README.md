@@ -1,11 +1,11 @@
 # ReactLogin
-_Más que un login, es un sitio para habilitar un usuario creado a traves de LDAP. Tiene 2 vistas, la primera es "Habilitar Usuario" donde el usuario, valga la redundancia, debe ingresar su clave enviada por un correo 
-e ingresar su nueva contraseña. La segunda vista es para cambiar la contraseña de su usuario en caso de haber olvidado su contraseña actual._
+Más que un login, es un sitio para habilitar un usuario creado a traves de LDAP. Tiene 2 vistas, la primera es "Habilitar Usuario" donde el usuario, valga la redundancia, debe ingresar su clave enviada por un correo 
+e ingresar su nueva contraseña. La segunda vista es para cambiar la contraseña de su usuario en caso de haber olvidado su contraseña actual.
 
 ## Comenzando
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
-###Pre-requisitos:
+### Pre-requisitos:
 _Necesitas tener instalado los siguientes packages:_
 ```
 npm i isomorphic-fetch
