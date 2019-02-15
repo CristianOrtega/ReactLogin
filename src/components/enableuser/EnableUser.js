@@ -9,17 +9,82 @@ class EnableUser extends Component {
         this.state = {
             currentPassword: '',
             newPassword: '',
-            confirmNewPassword: ''
+            confirmNewPassword: '',
+            errorCurrentPassword: '',
+            errorNewPassword: '',
+            errorConfirmNewPassword: ''
         }
-        this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.showPassword = this.showPassword.bind(this);
     }
-    handleInput(e) {
-        const { value, name } = e.target;
-        this.setState({
-            [name]: value
+
+    /* CurrentPassword */
+    handleCurrentPassword = event => {
+        this.setState({ currentPassword: event.target.value }, () => {
+            this.validateCurrentPassword();
         });
-        console.log(this.state);
+    };
+
+    validateCurrentPassword = () => {
+        const { currentPassword } = this.state;
+        this.setState({
+            errorCurrentPassword:
+                currentPassword.length === 4 ? null : 'La contraseña actual no debe superar cuatro dígitos'
+        });
+    }
+    /* NewPassword */
+    handleNewPassword = event => {
+        this.setState({ newPassword: event.target.value }, () => {
+            this.validateNewPassword();
+        });
+    };
+
+    validateNewPassword = () => {
+        const { newPassword } = this.state;
+        this.setState({
+            errorNewPassword:
+                newPassword.length >= 6 ? null : 'La nueva contraseña debe tener 6 o más caracteres'
+        });
+    }
+    /* ConfirmNewPassword */
+    handleConfirmNewPassword = event => {
+        this.setState({ confirmNewPassword: event.target.value }, () => {
+            this.validateConfirmNewPassword();
+        });
+    };
+
+    validateConfirmNewPassword = () => {
+        const { confirmNewPassword } = this.state;
+        const { newPassword } = this.state;
+        this.setState({
+            errorConfirmNewPassword:
+                newPassword === confirmNewPassword ? null : 'La confirmación no coincide con la nueva contraseña'
+        });
+    }
+
+    showPassword(btn) {
+        let element = null;
+        if (btn.currentTarget.id === 'showCurrentPassword') {
+            element = document.getElementById("currentPassword");
+        } else if (btn.currentTarget.id === 'showNewPassword') {
+            element = document.getElementById("newPassword");
+        } else {
+            element = document.getElementById("confirmNewPassword");
+        }
+        if (element.type === "password") {
+            element.type = "text";
+        } else {
+            element.type = "password";
+        }
+    }
+
+    validateForm(state) {
+        let isValid = true;
+        if (state.currentPassword === "" && state.newPassword === "" && state.confirmNewPassword === "") {
+            alert('Debe Completar el formulario');
+            isValid = false;
+        }
+        return isValid;
     }
 
     handleSubmit(e) {
@@ -30,35 +95,35 @@ class EnableUser extends Component {
         if (!me.validateForm(me.state)) {
             return null;
         }
-        let body = `rut=${rut}&currentPassword=${me.state.currentPassword}&newPassword=${me.state.newPassword}&client=${client}`;
-        alert('Enviando...');
-        fetch('http://localhost:9090/KNT_ALL_WS/webresources/report/loginTest', {
-            method: 'POST',
-            headers: new Headers({
-                'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
-            }),
-            body: body
-        })
-            .then((response) => {
-                debugger;
-                return response.json()
-            })
-            .then((recurso) => {
-                debugger;
-                console.log(recurso)
-            })
+        let data = {
+            userName: rut,
+            password: me.state.confirmNewPassword,
+            company: client
+        };
+        me._sendRequest(data);
     }
 
-    validateForm(state) {
-        let isValid = true;
-        if (state.currentPassword === "" && state.newPassword === "" && state.confirmNewPassword === "") {
-            alert('Debe Completar el formulario');
-            isValid = false;
-        } else if (state.newPassword !== state.confirmNewPassword) {
-            alert('La nueva contraseña no coiciden.');
-            isValid = false;
-        }
-        return isValid;
+    _sendRequest(data) {
+        fetch('ruta del servicio', {
+            method: 'POST',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+            }),
+            body: JSON.stringify(data)
+        }).then((response) => {
+            let clone = response.clone();
+            return clone.json();
+        }).then((recurso) => {
+            if (recurso) {
+                //venta redireccionando
+                window.location = 'http://www.clavesistemas.cl:8084/AGM/#';
+            } else {
+                // ventana error 
+            }
+
+        }).catch((error) => {
+            alert('Hubo un error al conectarse con el servidor.');
+        })
     }
 
     _getRutEncode(url) {
@@ -87,45 +152,73 @@ class EnableUser extends Component {
                         </div>
                         <div className="card-body">
                             <form onSubmit={this.handleSubmit}>
-                                <div className="input-group form-group input-group-alternative">
+                                <div className={`input-group form-group input-group-alternative ${this.state.errorCurrentPassword ? 'is-invalid' : ''}`}>
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><i className="fas fa-key"></i></span>
                                     </div>
-                                    <input name="currentPassword" type="password" className="form-control" placeholder="Contraseña Actual" onChange={this.handleInput}></input>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">
+                                    <input id="currentPassword"
+                                        name="currentPassword"
+                                        type="password"
+                                        className="form-control"
+                                        placeholder="Contraseña Actual"
+                                        value={this.state.currentPassword}
+                                        onChange={this.handleCurrentPassword}
+                                        onBlur={this.validateCurrentPassword}>
+                                    </input>
+                                    <div className="input-group-append">
+                                        <button id="showCurrentPassword" className="btn btn-outline-secondary" type="button" onClick={this.showPassword}>
                                             <i className="fas fa-eye"></i>
                                         </button>
                                     </div>
+                                    <div className='invalid-feedback'>{this.state.errorCurrentPassword}</div>
                                 </div>
-                                <div className="input-group form-group input-group-alternative">
+
+                                <div className={`input-group form-group input-group-alternative mt-4 ${this.state.errorNewPassword ? 'is-invalid' : ''}`}>
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><i className="fas fa-key"></i></span>
                                     </div>
-                                    <input name="newPassword" type="password" className="form-control" placeholder="Nueva Contraseña" onChange={this.handleInput}></input>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">
+                                    <input id="newPassword"
+                                        name="newPassword"
+                                        type="password"
+                                        className="form-control"
+                                        placeholder="Nueva Contraseña"
+                                        value={this.state.newPassword}
+                                        onChange={this.handleNewPassword}
+                                        onBlur={this.validateNewPassword}>
+                                    </input>
+                                    <div className="input-group-append">
+                                        <button id="showNewPassword" className="btn btn-outline-secondary" type="button" onClick={this.showPassword}>
                                             <i className="fas fa-eye"></i>
                                         </button>
                                     </div>
+                                    <div className='invalid-feedback'>{this.state.errorNewPassword}</div>
                                 </div>
-                                <div className="input-group form-group input-group-alternative">
+                                <div className={`input-group form-group input-group-alternative mt-4 ${this.state.errorConfirmNewPassword ? 'is-invalid' : ''}`}>
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><i className="fas fa-key"></i></span>
                                     </div>
-                                    <input name="confirmNewPassword" type="password" className="form-control" placeholder="Confirme Contraseña" onChange={this.handleInput}></input>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">
+                                    <input id="confirmNewPassword"
+                                        name="confirmNewPassword"
+                                        type="password"
+                                        className="form-control"
+                                        placeholder="Confirme Contraseña"
+                                        value={this.state.confirmNewPassword}
+                                        onChange={this.handleConfirmNewPassword}
+                                        onBlur={this.validateConfirmNewPassword}>
+                                    </input>
+                                    <div className="input-group-append">
+                                        <button id="showConfirmNewPassword" className="btn btn-outline-secondary" type="button" onClick={this.showPassword}>
                                             <i className="fas fa-eye"></i>
                                         </button>
                                     </div>
+                                    <div className='invalid-feedback'>{this.state.errorConfirmNewPassword}</div>
                                 </div>
                             </form>
                         </div>
                         <div className="card-footer">
                             <div className="row">
                                 <div className="col text-right">
-                                    <input type="submit" value="Enviar" className="btn btn-default"></input>
+                                    <input type="submit" value="Enviar" className="btn btn-default" onClick={this.handleSubmit}></input>
                                 </div>
                             </div>
                         </div>

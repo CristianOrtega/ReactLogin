@@ -25,7 +25,7 @@ class App extends Component {
           <img src={logo} className="App-logo mt-2 mb-2" alt="logo" />
           <EnableUser />
           <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-              <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+              <polygon className="fill-default" points="2560 0 2560 100 0 100"></polygon>
           </svg>
           <div className="fixed-bottom pb-4">
               <h6 className="text-center text-white-50">Footer</h6>
@@ -38,7 +38,7 @@ class App extends Component {
           <img src={logo} className="App-logo mt-2 mb-2" alt="logo" />
           <ChangePassword />
           <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-              <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+              <polygon className="fill-default" points="2560 0 2560 100 0 100"></polygon>
           </svg>
           <div className="fixed-bottom pb-4">
               <h6 className="text-center text-white-50">Footer</h6>
@@ -56,7 +56,7 @@ class App extends Component {
           <img src={notFound} className="notFound mt-2 mb-2" alt="404" />
           <PageNotFound />
           <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-              <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+              <polygon className="fill-default" points="2560 0 2560 100 0 100"></polygon>
           </svg>
           <div className="fixed-bottom pb-4">
               <h6 className="text-center text-white-50">Footer</h6>
