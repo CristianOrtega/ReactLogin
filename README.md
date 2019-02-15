@@ -15,7 +15,7 @@ npm i isomorphic-fetch
 npm i node-fetch
 ```
 
-####Cómo ingresar a las vistas:
+#### Cómo ingresar a las vistas:
 
 Para acceder a las 2 vistas tienes que entrar a las siguientes rutas:
 
