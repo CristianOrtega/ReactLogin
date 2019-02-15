@@ -15,6 +15,15 @@ npm i isomorphic-fetch
 npm i node-fetch
 ```
 
+####Cómo ingresar a las vistas:
+
+Para acceder a las 2 vistas tienes que entrar a las siguientes rutas:
+
+* Habilitar Usuario: http://localhost:3000/?action=enable?rut=rutencriptado?client=clienteencriptado
+* Cambiar Contraseña: http://localhost:3000/?action=changePassword?rut=rutencriptado?client=clienteencriptado 
+
+** Nota: El puerto puede cambiar las configuraciones de tu equipo.
+
 
 ### `npm start`
 
